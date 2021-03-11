@@ -21,11 +21,10 @@ a:hover {
 }
 
 header {
-  position: sticky;
+  position: fixed;
   background-color: white;
   height: 80px;
   width: 100%;
-  top: 0;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
 }
 
@@ -92,7 +91,8 @@ header .register_btn:hover {
 }
 
 .content {
-  height: 800px;
+  height: 100vh;
+  width: 100vw;
   background: linear-gradient(330deg, #4ade80 10%, #a3e635 90%);
   color: #1E293B;
 }
@@ -130,6 +130,7 @@ header .register_btn:hover {
   display: flex;
   flex-direction: column;
   width: 30%;
+  min-width: 400px;
   margin-left: 15px;
   background-color: white;
   padding: 30px 40px;
@@ -165,4 +166,53 @@ header .register_btn:hover {
   border-radius: 20px;
   font-size: 16px;
   outline: none;
+}
+
+@media(max-width:1000px) {
+  .register__block {
+    display: none;
+  }
+
+  .content .container {
+    justify-content: center;
+  }
+
+  .info__block {
+    width: 100%;
+  }
+}
+
+@media(max-width:880px) {
+  .left__block .logo {
+    display: none;
+  }
+}
+
+@media(max-width:770px) {
+  header .right__block {
+    display: none;
+  }
+
+  header .left__block .header__left__links {
+    margin-left: 0;
+  }
+
+  header .container {
+    justify-content: center;
+  }
+
+  .content {
+    text-align: center;
+  }
+}
+
+@media(max-width:550px) {
+  .content .info__big {
+    font-size: 35px;
+    min-width: 0;
+  }
+
+  .content .info__small {
+    font-size: 20px;
+  }
 }
