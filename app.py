@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect
+from loginform import LoginForm
+from registerform import RegisterForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'qwekwqkJDHASIqwop'
@@ -15,9 +17,21 @@ def home():
 def task():
     return render_template('task.html')
 
-@app.route('/auth')
+@app.route('/auth', methods=['GET', 'POST'])
 def authPage():
-    return render_template('auth.html')
+    form = LoginForm()
+    label = ['Авторизация', 'Вы тут впервые?', '/register', 'Зарегистрируйтесь']
+    if form.validate_on_submit():
+        return redirect('/')
+    return render_template('auth.html', form=form, label=label)
+
+@app.route('/register', methods=['GET', 'POST'])
+def registerPage():
+    form = RegisterForm()
+    label = ['Регистрация', 'Уже есть аккаунт?', '/auth', 'Авторизуйтесь']
+    if form.validate_on_submit():
+        return redirect('/')
+    return render_template('auth.html', form=form, label=label)
 
 if __name__ == "__main__":
     app.run(debug=True)

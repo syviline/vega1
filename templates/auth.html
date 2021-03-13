@@ -15,12 +15,19 @@
 <body>
     <div class="skew">
         <div class="content">
-            <div class="form__label">Авторизация</div>
-            <form action="auth">
-                <input type="text">
-                <input type="text">
-                <button class="submit">Войти</button>
+            <div class="form__label">{{ label[0] }}</div>
+            <form action="auth" method="POST" novalidate>
+                <div>{{ form.csrf_token }}</div>
+                {% for field in form if field.name != 'csrf_token' and field.name != 'submit' %}
+                    <div class="label">{{ field.label() }}:</div>
+                    {{ field() }}
+                    {% for error in field.errors %}
+                        <div class="error">{{ error }}</div>
+                    {% endfor %}
+                {% endfor %}
+                {{ form.submit(class='submit') }}
             </form>
+            <div class="registerlink__label">{{ label[1] }} <a href="{{ label[2] }}" class="register__link">{{ label[3] }}</a></div>
         </div>
     </div>
 </body>
