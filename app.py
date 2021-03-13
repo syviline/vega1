@@ -1,6 +1,7 @@
 from flask import Flask, render_template
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'qwekwqkJDHASIqwop'
 
 @app.route('/')
 def index():
@@ -14,6 +15,9 @@ def home():
 def task():
     return render_template('task.html')
 
+@app.route('/auth')
+def authPage():
+    return render_template('auth.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
